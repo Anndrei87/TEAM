@@ -1,0 +1,13 @@
+# Duplicatas de assets (nomes longos do Cursor)
+assets/c__Users_Nemo*
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
