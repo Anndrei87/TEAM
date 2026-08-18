@@ -44,12 +44,36 @@
     };
   </script>
   <style>
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
     .gradient-text {
       background: linear-gradient(135deg, #fff 0%, #C0C0C0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-reveal-delay="1"] { transition-delay: 0.1s; }
+    [data-reveal-delay="2"] { transition-delay: 0.2s; }
+    [data-reveal-delay="3"] { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
   </style>
 
@@ -91,7 +115,8 @@
         <a href="#team" class="hover:text-white transition-colors">Team</a>
         <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
         <a href="#resultados" class="hover:text-white transition-colors">Resultados</a>
-        <a href="#como-funciona" class="hover:text-white transition-colors">Como funciona</a>
+        <a href="#consultoria" class="hover:text-white transition-colors">Consultoria</a>
+        <a href="#planos" class="hover:text-white transition-colors">Planos</a>
         <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-3">
@@ -109,7 +134,8 @@
         <a href="#team" class="py-2 text-neutral-300">Team</a>
         <a href="#servicos" class="py-2 text-neutral-300">Serviços</a>
         <a href="#resultados" class="py-2 text-neutral-300">Resultados</a>
-        <a href="#como-funciona" class="py-2 text-neutral-300">Como funciona</a>
+        <a href="#consultoria" class="py-2 text-neutral-300">Consultoria</a>
+        <a href="#planos" class="py-2 text-neutral-300">Planos</a>
         <a href="#faq" class="py-2 text-neutral-300">FAQ</a>
         <a href="https://wa.me/557192409319?text=Ol%C3%A1%20Thiago%2C%20vim%20pelo%20site." target="_blank" rel="noopener noreferrer" class="mt-2 bg-whatsapp text-white text-center font-semibold py-3 rounded-xl">Falar no WhatsApp</a>
       </div>
@@ -123,7 +149,7 @@
       <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black" aria-hidden="true"></div>
       <div class="absolute top-1/4 right-0 w-96 h-96 bg-brand-wine/10 rounded-full blur-3xl" aria-hidden="true"></div>
       <div class="relative max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        <div>
+        <div data-reveal>
           <p class="text-brand-metal text-sm font-semibold tracking-widest uppercase mb-4">Especialista em Biomecânica · Salvador-BA</p>
           <h1 id="hero-heading" class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
             Sua evolução começa com <span class="gradient-text">uma decisão</span>
@@ -141,7 +167,7 @@
             </a>
           </div>
         </div>
-        <div class="relative">
+        <div class="relative" data-reveal data-reveal-delay="2">
           <div class="absolute -inset-4 bg-gradient-to-tr from-brand-wine/20 to-transparent rounded-3xl blur-2xl" aria-hidden="true"></div>
           <img src="assets/hero-studio.png" alt="Thiago William planejando treinos e consultoria online com especialização em biomecânica" class="relative rounded-2xl w-full h-auto shadow-2xl" width="819" height="1024" fetchpriority="high">
         </div>
@@ -236,12 +262,12 @@
     <!-- Resultados -->
     <section id="resultados" class="py-16 md:py-24 bg-neutral-900/50" aria-labelledby="resultados-heading">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal>
           <h2 id="resultados-heading" class="font-display text-3xl md:text-4xl font-bold mb-4">Resultados reais</h2>
           <p class="text-neutral-400 max-w-2xl mx-auto">Essas evoluções não aconteceram por sorte. Aconteceram com treino bem feito, estratégia e constância.</p>
         </div>
         <!-- Destaque -->
-        <figure class="max-w-3xl mx-auto mb-10 rounded-2xl border border-neutral-700 bg-neutral-900 p-4 md:p-6 shadow-xl shadow-black/30">
+        <figure class="max-w-3xl mx-auto mb-10 rounded-2xl border border-neutral-700 bg-neutral-900 p-4 md:p-6 shadow-xl shadow-black/30" data-reveal>
           <img src="assets/resultado-estrategia.png" alt="Antes e depois em destaque — treino sem direção gera esforço, estratégia gera resultado" class="w-full h-auto rounded-xl" loading="eager" width="1024" height="1024" fetchpriority="high">
           <figcaption class="pt-5 md:pt-6 text-center">
             <p class="font-display font-bold text-lg md:text-xl text-white mb-2">Treino sem direção gera esforço.<br>Estratégia gera resultado.</p>
@@ -277,7 +303,7 @@
     <!-- Depoimentos -->
     <section id="depoimentos" class="py-16 md:py-24" aria-labelledby="depoimentos-heading">
       <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal>
           <h2 id="depoimentos-heading" class="font-display text-3xl md:text-4xl font-bold mb-4">O que dizem sobre o Team William</h2>
           <p class="text-neutral-400">Comentários reais do Instagram — engajamento da comunidade Team William.</p>
         </div>
@@ -289,27 +315,90 @@
       </div>
     </section>
 
-    <!-- Como funciona -->
-    <section id="como-funciona" class="py-16 md:py-24 bg-neutral-900/50" aria-labelledby="como-heading">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 id="como-heading" class="font-display text-3xl md:text-4xl font-bold mb-4">Como funciona</h2>
-          <p class="text-neutral-400 max-w-2xl mx-auto">Do primeiro contato à evolução contínua — simples, claro e com suporte em cada etapa.</p>
+    <!-- Consultoria -->
+    <section id="consultoria" class="py-16 md:py-24 bg-neutral-900/50 border-y border-neutral-800" aria-labelledby="consultoria-heading">
+      <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <div data-reveal>
+          <h2 id="consultoria-heading" class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+            Dúvidas sobre a <span class="gradient-text">consultoria</span>
+          </h2>
+          <p class="text-neutral-400 text-base md:text-lg leading-relaxed">
+            Leia todo o conteúdo deste site com atenção para compreender como funciona a consultoria e, ao final, escolha o plano que melhor se encaixa nos seus objetivos.
+          </p>
         </div>
-        <ol class="grid md:grid-cols-5 gap-6">
-          <li class="relative text-center"><div class="w-12 h-12 bg-brand-wine rounded-full flex items-center justify-center font-display font-bold mx-auto mb-4">1</div><h3 class="font-display font-bold mb-2">Contato</h3><p class="text-neutral-400 text-sm">Você chama no WhatsApp e conta seu objetivo.</p></li>
-          <li class="relative text-center"><div class="w-12 h-12 bg-brand-wine rounded-full flex items-center justify-center font-display font-bold mx-auto mb-4">2</div><h3 class="font-display font-bold mb-2">Avaliação</h3><p class="text-neutral-400 text-sm">Análise do seu perfil, rotina e histórico.</p></li>
-          <li class="relative text-center"><div class="w-12 h-12 bg-brand-wine rounded-full flex items-center justify-center font-display font-bold mx-auto mb-4">3</div><h3 class="font-display font-bold mb-2">Planejamento</h3><p class="text-neutral-400 text-sm">Treino + alimentação montados para você.</p></li>
-          <li class="relative text-center"><div class="w-12 h-12 bg-brand-wine rounded-full flex items-center justify-center font-display font-bold mx-auto mb-4">4</div><h3 class="font-display font-bold mb-2">Início</h3><p class="text-neutral-400 text-sm">Começa o processo com orientação clara.</p></li>
-          <li class="relative text-center"><div class="w-12 h-12 bg-brand-wine rounded-full flex items-center justify-center font-display font-bold mx-auto mb-4">5</div><h3 class="font-display font-bold mb-2">Acompanhamento</h3><p class="text-neutral-400 text-sm">Ajustes, suporte e evolução monitorada.</p></li>
-        </ol>
+        <div data-reveal data-reveal-delay="2">
+          <h3 class="font-display text-xl md:text-2xl font-bold uppercase tracking-wide text-brand-metal mb-8">Como funciona a consultoria?</h3>
+          <ol class="space-y-6 text-neutral-300 text-sm md:text-base leading-relaxed">
+            <li><strong class="text-brand-wine">1 —</strong> A consultoria é <strong class="text-white">100% online</strong></li>
+            <li><strong class="text-brand-wine">2 —</strong> Anamnese completa (questionário detalhado) para entender seus objetivos, histórico, rotina e possíveis limitações.</li>
+            <li><strong class="text-brand-wine">3 —</strong> Treino individualizado, montado com base nas suas necessidades</li>
+            <li>
+              <strong class="text-brand-wine">4 —</strong> Acompanhamento pelo aplicativo, onde você recebe:
+              <ul class="mt-3 ml-4 space-y-2 list-disc text-neutral-400">
+                <li>Seus treinos organizados</li>
+                <li>Vídeos demonstrativos dos exercícios</li>
+                <li>Cargas, séries, repetições e descanso</li>
+                <li>Controle de evolução</li>
+              </ul>
+            </li>
+            <li><strong class="text-brand-wine">5 —</strong> Suporte online direto comigo para tirar dúvidas, ajustes de treino e acompanhamento durante o período da consultoria</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="py-16 md:py-24 bg-neutral-950" aria-labelledby="planos-heading">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 id="planos-heading" class="font-display text-3xl md:text-4xl font-bold text-center mb-4" data-reveal>Nossos <span class="gradient-text">Planos</span></h2>
+        <p class="text-neutral-400 text-center max-w-xl mx-auto mb-12 md:mb-16" data-reveal>O primeiro passo para testar e começar sua transformação.</p>
+
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-6">
+          <!-- Basic -->
+          <article class="border border-neutral-800 rounded-2xl p-6 md:p-8 flex flex-col bg-neutral-900 hover:border-brand-wine/50 transition-colors duration-300" data-reveal data-reveal-delay="1">
+            <p class="text-xs uppercase tracking-widest text-brand-metal mb-1">Plano</p>
+            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase mb-4">Basic</h3>
+            <p class="font-display text-3xl md:text-4xl font-bold mb-1">1x de R$250</p>
+            <p class="text-neutral-500 text-sm mb-6">/ou pix</p>
+            <p class="font-semibold text-neutral-300 mb-8">Suporte diário via whatsapp</p>
+            <a href="https://wa.me/557192409319?text=Quero%20o%20PLANO%20BASIC%20do%20Team%20William" target="_blank" rel="noopener noreferrer" class="mt-auto block text-center bg-brand-wine hover:bg-brand-wine/80 text-white font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-xl transition-colors min-h-[48px]">
+              Selecione esse plano
+            </a>
+          </article>
+
+          <!-- Gold -->
+          <article class="border border-neutral-800 rounded-2xl p-6 md:p-8 flex flex-col bg-neutral-900 hover:border-brand-wine/50 transition-colors duration-300" data-reveal data-reveal-delay="2">
+            <p class="text-xs uppercase tracking-widest text-brand-metal mb-1">Plano</p>
+            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase mb-4">Gold</h3>
+            <p class="font-display text-3xl md:text-4xl font-bold mb-1">3x de R$180</p>
+            <p class="text-neutral-500 text-sm mb-6">/ou pix R$540,00</p>
+            <p class="font-semibold text-neutral-300 mb-8">Suporte diário via whatsapp</p>
+            <a href="https://wa.me/557192409319?text=Quero%20o%20PLANO%20GOLD%20do%20Team%20William" target="_blank" rel="noopener noreferrer" class="mt-auto block text-center bg-brand-wine hover:bg-brand-wine/80 text-white font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-xl transition-colors min-h-[48px]">
+              Selecione esse plano
+            </a>
+          </article>
+        </div>
+
+        <!-- Diamond -->
+        <article class="border border-neutral-800 rounded-2xl p-6 md:p-8 flex flex-col bg-neutral-900 hover:border-brand-wine/50 transition-colors duration-300 max-w-sm mx-auto" data-reveal data-reveal-delay="3">
+          <p class="text-xs uppercase tracking-widest text-brand-metal mb-1">Plano</p>
+          <h3 class="font-display text-2xl md:text-3xl font-bold uppercase mb-4">Diamond</h3>
+          <p class="font-display text-3xl md:text-4xl font-bold mb-1">6x de R$150</p>
+          <p class="text-neutral-500 text-sm mb-6">/ou pix R$850,00</p>
+          <p class="font-semibold text-neutral-300 mb-8">Suporte diário via whatsapp</p>
+          <a href="https://wa.me/557192409319?text=Quero%20o%20PLANO%20DIAMOND%20do%20Team%20William" target="_blank" rel="noopener noreferrer" class="mt-auto block text-center bg-brand-wine hover:bg-brand-wine/80 text-white font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-xl transition-colors min-h-[48px]">
+            Selecione esse plano
+          </a>
+        </article>
+
+        <p class="text-center text-neutral-600 text-xs mt-8" data-reveal>* Valores e condições sujeitos a confirmação com o profissional.</p>
       </div>
     </section>
 
     <!-- FAQ -->
     <section id="faq" class="py-16 md:py-24" aria-labelledby="faq-heading">
       <div class="max-w-3xl mx-auto px-4">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal>
           <h2 id="faq-heading" class="font-display text-3xl md:text-4xl font-bold mb-4">Perguntas frequentes</h2>
         </div>
         <div class="space-y-3" role="list">
@@ -343,7 +432,7 @@
 
     <!-- CTA Final -->
     <section class="py-16 md:py-24 bg-gradient-to-br from-brand-wine/20 via-neutral-950 to-neutral-950" aria-labelledby="cta-heading">
-      <div class="max-w-3xl mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto px-4 text-center" data-reveal>
         <h2 id="cta-heading" class="font-display text-3xl md:text-5xl font-bold mb-6">AGORA NÓS VAMOS.</h2>
         <p class="text-lg text-neutral-400 mb-4">Você já sabe que evolução não acontece por sorte. Falta uma decisão — e alguém que entrega estratégia de verdade.</p>
         <p class="text-neutral-500 text-sm mb-8">* Vagas de acompanhamento próximo podem ser limitadas — confirme disponibilidade.</p>
@@ -381,6 +470,8 @@
             <li><a href="#team" class="hover:text-white transition-colors">Team William</a></li>
             <li><a href="#servicos" class="hover:text-white transition-colors">Serviços</a></li>
             <li><a href="#resultados" class="hover:text-white transition-colors">Resultados</a></li>
+            <li><a href="#consultoria" class="hover:text-white transition-colors">Consultoria</a></li>
+            <li><a href="#planos" class="hover:text-white transition-colors">Planos</a></li>
             <li><a href="https://solo.to/thiagowilliam" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">solo.to/thiagowilliam</a></li>
           </ul>
         </div>
