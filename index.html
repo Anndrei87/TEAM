@@ -67,11 +67,90 @@
     [data-reveal-delay="1"] { transition-delay: 0.1s; }
     [data-reveal-delay="2"] { transition-delay: 0.2s; }
     [data-reveal-delay="3"] { transition-delay: 0.3s; }
+    .hamburger-box {
+      position: relative;
+      display: block;
+      width: 22px;
+      height: 16px;
+      margin: 0 auto;
+    }
+    .hamburger-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 999px;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.2s ease;
+    }
+    .hamburger-bar:nth-child(1) { top: 0; }
+    .hamburger-bar:nth-child(2) { top: 7px; }
+    .hamburger-bar:nth-child(3) { top: 14px; }
+    #menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    #menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.4);
+    }
+    #menu-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    @media (max-width: 1023px) {
+      .mobile-nav {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        border-top: 1px solid transparent;
+        transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.25s ease,
+                    visibility 0.35s,
+                    border-color 0.25s ease;
+      }
+      .mobile-nav > .mobile-nav-inner {
+        overflow: hidden;
+      }
+      .mobile-nav.is-open {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        border-top-color: #262626;
+      }
+      .mobile-nav a {
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .mobile-nav.is-open a {
+        opacity: 1;
+        transform: none;
+      }
+      .mobile-nav.is-open a:nth-child(1) { transition-delay: 0.05s; }
+      .mobile-nav.is-open a:nth-child(2) { transition-delay: 0.08s; }
+      .mobile-nav.is-open a:nth-child(3) { transition-delay: 0.11s; }
+      .mobile-nav.is-open a:nth-child(4) { transition-delay: 0.14s; }
+      .mobile-nav.is-open a:nth-child(5) { transition-delay: 0.17s; }
+      .mobile-nav.is-open a:nth-child(6) { transition-delay: 0.2s; }
+      .mobile-nav.is-open a:nth-child(7) { transition-delay: 0.23s; }
+      .mobile-nav.is-open a:nth-child(8) { transition-delay: 0.26s; }
+      body.menu-open {
+        overflow: hidden;
+      }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       [data-reveal] {
         opacity: 1;
         transform: none;
+        transition: none;
+      }
+      .hamburger-bar,
+      .mobile-nav,
+      .mobile-nav a {
         transition: none;
       }
     }
@@ -145,7 +224,7 @@
         "description": "Consultoria fitness online e personal training.",
         "address": { "@type": "PostalAddress", "addressLocality": "Salvador", "addressRegion": "BA", "addressCountry": "BR" },
         "telephone": "+557192409319",
-        "email": "contato@teamwilliam.com"
+        "email": "thiagowilliamtreinador@gmail.com"
       }
     ]
   }
@@ -174,21 +253,27 @@
         <a href="https://wa.me/557192409319?text=Ol%C3%A1%20Thiago%2C%20vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20a%20consultoria." target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors min-h-[48px]">
           Falar no WhatsApp
         </a>
-        <button id="menu-toggle" class="lg:hidden p-2 rounded-lg border border-neutral-700 min-h-[48px] min-w-[48px]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <button id="menu-toggle" class="hamburger lg:hidden p-2 rounded-lg border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-900 transition-colors min-h-[48px] min-w-[48px]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+          <span class="hamburger-box" aria-hidden="true">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </span>
         </button>
       </div>
     </div>
-    <nav id="mobile-menu" class="hidden lg:hidden border-t border-neutral-800 bg-neutral-950 px-4 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Menu mobile">
-      <div class="flex flex-col gap-3">
-        <a href="#sobre" class="py-2 text-neutral-300">Sobre</a>
-        <a href="#team" class="py-2 text-neutral-300">Team</a>
-        <a href="#servicos" class="py-2 text-neutral-300">Serviços</a>
-        <a href="#resultados" class="py-2 text-neutral-300">Resultados</a>
-        <a href="#consultoria" class="py-2 text-neutral-300">Consultoria</a>
-        <a href="#planos" class="py-2 text-neutral-300">Planos</a>
-        <a href="#faq" class="py-2 text-neutral-300">FAQ</a>
-        <a href="https://wa.me/557192409319?text=Ol%C3%A1%20Thiago%2C%20vim%20pelo%20site." target="_blank" rel="noopener noreferrer" class="mt-2 bg-whatsapp text-white text-center font-semibold py-3 rounded-xl">Falar no WhatsApp</a>
+    <nav id="mobile-menu" class="mobile-nav lg:hidden bg-neutral-950/95 backdrop-blur-md max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Menu mobile">
+      <div class="mobile-nav-inner">
+        <div class="flex flex-col gap-1 px-4 py-4">
+          <a href="#sobre" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Sobre</a>
+          <a href="#team" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Team</a>
+          <a href="#servicos" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Serviços</a>
+          <a href="#resultados" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Resultados</a>
+          <a href="#consultoria" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Consultoria</a>
+          <a href="#planos" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">Planos</a>
+          <a href="#faq" class="py-3 px-2 text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors">FAQ</a>
+          <a href="https://wa.me/557192409319?text=Ol%C3%A1%20Thiago%2C%20vim%20pelo%20site." target="_blank" rel="noopener noreferrer" class="mt-2 bg-whatsapp hover:bg-whatsapp-hover text-white text-center font-semibold py-3 rounded-xl transition-colors">Falar no WhatsApp</a>
+        </div>
       </div>
     </nav>
   </header>
@@ -627,7 +712,7 @@
           <ul class="space-y-2 text-sm text-neutral-400">
             <li><a href="https://wa.me/557192409319" target="_blank" rel="noopener noreferrer" class="hover:text-whatsapp transition-colors">WhatsApp: (71) 92409-319</a></li>
             <li><a href="https://instagram.com/_williiam02" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram: @_williiam02</a></li>
-            <li><a href="mailto:contato@teamwilliam.com" class="hover:text-white transition-colors">E-mail: contato@teamwilliam.com</a></li>
+            <li><a href="mailto:thiagowilliamtreinador@gmail.com" class="hover:text-white transition-colors">E-mail: thiagowilliamtreinador@gmail.com</a></li>
           </ul>
         </div>
         <div>
