@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initSmoothScroll();
   initRevealAnimations();
+  initResultadoLightbox();
 });
 
 function initMobileMenu() {
@@ -112,4 +113,66 @@ function initRevealAnimations() {
   );
 
   elements.forEach((el) => observer.observe(el));
+}
+
+function initResultadoLightbox() {
+  const dialog = document.getElementById('resultado-dialog');
+  const dialogImg = document.getElementById('resultado-dialog-img');
+  const closeBtn = document.getElementById('resultado-dialog-close');
+  const triggers = document.querySelectorAll('[data-resultado-trigger]');
+  if (!dialog || !dialogImg || !triggers.length) return;
+
+  const mq = window.matchMedia('(min-width: 768px)');
+  let lastTrigger = null;
+
+  const syncTriggers = () => {
+    const enabled = mq.matches;
+    triggers.forEach((btn) => {
+      btn.tabIndex = enabled ? 0 : -1;
+      btn.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+      btn.setAttribute('aria-haspopup', enabled ? 'dialog' : 'false');
+    });
+    if (!enabled && dialog.open) dialog.close();
+  };
+
+  const open = (btn) => {
+    if (!mq.matches) return;
+    const img = btn.querySelector('img');
+    if (!img) return;
+    lastTrigger = btn;
+    dialogImg.src = img.currentSrc || img.src;
+    dialogImg.alt = img.alt || '';
+    dialog.showModal();
+  };
+
+  triggers.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      if (!mq.matches) {
+        event.preventDefault();
+        return;
+      }
+      open(btn);
+    });
+  });
+
+  closeBtn?.addEventListener('click', () => dialog.close());
+
+  dialog.addEventListener('click', (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const clickedInside =
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom;
+    if (!clickedInside) dialog.close();
+  });
+
+  dialog.addEventListener('close', () => {
+    dialogImg.removeAttribute('src');
+    lastTrigger?.focus();
+    lastTrigger = null;
+  });
+
+  mq.addEventListener('change', syncTriggers);
+  syncTriggers();
 }
