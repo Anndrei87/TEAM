@@ -1,6 +1,9 @@
 # Duplicatas de assets (nomes longos do Cursor)
 assets/c__Users_Nemo*
 
+# Pacote de upload Hostinger
+teamwilliam-public_html.zip
+
 # Sistema
 .DS_Store
 Thumbs.db
